@@ -23,6 +23,7 @@ public class DestroyOnCollision : MonoBehaviour
     {
         if (other.gameObject.tag == tag)
         {
+            Debug.Log("Detroyed");
             yield return new WaitForSeconds(destroyTime);
             Destroy(gameObject);
         }
