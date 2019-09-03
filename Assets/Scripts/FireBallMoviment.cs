@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class FireBallMoviment : MonoBehaviour
 {
-   float time;
-   public float fireSpeed;
+    float time;
+    public float fireSpeed;
+    public Vector3 direction;
 
      void Start()
     {
-        Vector3 force = new Vector3(0,0,1);
-
-        GetComponent<Rigidbody>().AddForce(force);  
+        GetComponent<Rigidbody>().AddForce(direction*fireSpeed);
     }
-    
-    //void LateUpdate()
-    //{
+     
+    void LateUpdate()
+    {
     //
       //  if (transform.up.y < 0){
         //    transform.position += 1 * transform.up * fireSpeed * Time.deltaTime;
@@ -27,9 +26,9 @@ public class FireBallMoviment : MonoBehaviour
         //}
         
         
-        //time += Time.deltaTime;
-        //if (time > 4) Destroy(gameObject);
-    //}
+        time += Time.deltaTime;
+        if (time > 4) Destroy(gameObject);
+    }
 
 
     private void OnCollisionEnter(Collision col)

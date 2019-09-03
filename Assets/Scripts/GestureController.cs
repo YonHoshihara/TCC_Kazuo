@@ -29,15 +29,20 @@ public class GestureController : MonoBehaviour
     {
 
         float initPos, finalPos;
+        Vector3 init_position_vector, final_position_vector, direction;
         initPos = hand.position.z;
-       
+        init_position_vector = hand.position;
         yield return new WaitForSeconds(.2F);
         finalPos = hand.position.z;
-        
+        final_position_vector = hand.position;
+        direction = final_position_vector - init_position_vector;
+       
+
         if ((finalPos - initPos >= .1F)) 
         {
-            Debug.Log("FIREEEEEEEEEEEEEEEE!!!");  
-            powerController.SpawnFireball(hand);
+            Debug.Log("FIREEEEEEEEEEEEEEEE!!!");
+            direction = direction.normalized;
+            powerController.SpawnFireball(hand, direction);
         }
         detectGesture = null;
     

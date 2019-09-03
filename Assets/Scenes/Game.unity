@@ -173,7 +173,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133964894}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede50c4df4cf77a448b1684457fd64c5, type: 3}
   m_Name: 
@@ -438,6 +438,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leap Rig
       objectReference: {fileID: 0}
+    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.17454061
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.0546561
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.028654965
+      objectReference: {fileID: 0}
     - target: {fileID: 5904385020762210056, guid: 13f369efe36b9564f865221343796c91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,21 +537,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.17454061
-      objectReference: {fileID: 0}
-    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.0546561
-      objectReference: {fileID: 0}
-    - target: {fileID: 5904385019805700534, guid: 13f369efe36b9564f865221343796c91,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.028654965
       objectReference: {fileID: 0}
     - target: {fileID: 5904385021135887565, guid: 13f369efe36b9564f865221343796c91,
         type: 3}
