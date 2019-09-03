@@ -22,6 +22,7 @@ public class SpawnObjects : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(objectsToSpawn[Random.Range(0, objectsToSpawn.Length - 1)], (spawnPoints[Random.Range(0, spawnPoints.Length - 1)]));
+        //Debug.Log(Random.Range(0, objectsToSpawn.Length+1));
+        Instantiate(objectsToSpawn[Random.Range(0, objectsToSpawn.Length)], (spawnPoints[Random.Range(0, spawnPoints.Length - 1)]));
     }
 }

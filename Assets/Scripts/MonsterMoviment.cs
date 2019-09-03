@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterMoviment : MonoBehaviour
 {
-    public float speed;
+    public float speed,time;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +17,9 @@ public class MonsterMoviment : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        time += Time.deltaTime;
+        if (time > 5) Destroy(gameObject);
     }
 }
