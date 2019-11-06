@@ -5,7 +5,7 @@ using UnityEngine;
 public class GestureController : MonoBehaviour
 {
     // Start is called before the first frame update
-        
+   /*     
     public Transform hand;
     Coroutine detectGesture;
     public PowerController powerController;
@@ -42,10 +42,11 @@ public class GestureController : MonoBehaviour
         {
             Debug.Log("FIREEEEEEEEEEEEEEEE!!!");
             direction = direction.normalized;
-            powerController.SpawnFireball(hand, direction);
+           // powerController.SpawnFireball(hand, direction);
         }
         detectGesture = null;
     
 
     }
+    */
 }
