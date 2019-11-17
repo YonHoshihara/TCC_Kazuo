@@ -4,127 +4,100 @@ using UnityEngine;
 
 public class PowerController : MonoBehaviour
 {
-    //public SkinnedMeshRenderer handRenderer;
-    //public GameObject fireball;
-
+ 
     public string currentGesture = " ";
-
-    //public Transform rightPalm;
-   // public Sword sword;
     string lastGesture;
     string stateMachine = "";
-    //GameObject enemy;
-    //public GameObject thunderPower, flamesPower, plasmaPower,gun;
-    //public Transform lightningEnd;
-    //Coroutine curPower;
-
-    /*
-    IEnumerator GunResize(string value){
-        if(value.Equals("bigger")){
-            for(float i=.25f;i<1f;i+=0.15f){
-                gun.transform.localScale = new Vector3(i,i,i);
-                yield return new WaitForSeconds(0.02f);
-            }
-        }
-        else{
-            for(float i=1F;i>.25f;i-=0.15f){
-                gun.transform.localScale = new Vector3(i,i,i);
-                yield return new WaitForSeconds(0.01f);
-            }
-        }
-    }
-
-   
-    IEnumerator ActivatePlasmaBall(){
-        gun.SetActive(true);
-      
-        StartCoroutine(GunResize("bigger"));
-        yield return new WaitForSeconds(.5F);
-        while(true)
-        {
-            GameObject plasma = Instantiate(plasmaPower,gun.transform.position,gun.transform.rotation) as GameObject;
-            yield return new WaitForSeconds(.5F);
-            if(!currentGesture.Equals("FIRE")){
-                break;
-            }
-        }
-        StartCoroutine(GunResize("smaller"));
-        yield return new WaitForSeconds(.2F);
-        gun.SetActive(false);
-        curPower = null;
-    }
-   
-    IEnumerator ActivateThunder(){
-        try{
-        	enemy = GameObject.Find("Enemy");
-        }
-        catch{
-        	print("n achou");
-        	curPower = null;
-        }
-        if(enemy!=null){
-            lightningEnd.transform.parent = enemy.transform;
-            lightningEnd.transform.position = enemy.transform.position;
-        	Camera.main.GetComponent<PerlinShake>().test = true;
-        	thunderPower.SetActive(true);
-        	enemy.GetComponent<Rigidbody>().useGravity = true;        	
-			enemy.GetComponent<Rigidbody>().isKinematic = false;
-        	enemy.GetComponent<Rigidbody>().AddForce(-Vector3.forward * 100);
-            yield return new WaitForSeconds(.5F);
-        	enemy.name = "TRASH";
-        	lightningEnd.transform.parent = null;
-        	thunderPower.SetActive(false);
-         }
-         curPower = null;
-         yield return null;
-    }
-
-     IEnumerator ActivateFlames(){
-    	// Camera.main.GetComponent<PerlinShake>().test = true;
-    	flamesPower.SetActive(true);
-    	// enemy.GetComponent<Rigidbody>().isKinematic = false;
-    	// enemy.GetComponent<Rigidbody>().AddForce(Vector3.forward * 10000);
-
-    	while(currentGesture.Equals("COOL"))
-    	{
-			yield return new WaitForSeconds(.3F);
-    	}
-    	
-    	flamesPower.SetActive(false);
-    	curPower = null;
-    }
-    
-    public void Update(){
-        if(Input.GetKeyDown("a"))
-        {
-            StartCoroutine(ActivatePlasmaBall());
-        }
-    }
-    */
+    public GameObject fire;
+    public GameObject fire2;
+    public GameObject fire3;
+    public GameObject hand_magic_atack;
+    public GameObject hand_magic_defense;
+    //public bool is_start_magic = false;
     IEnumerator Start()
     {
         
         while (true)
         {
-            if(stateMachine.Equals("THUMB") && currentGesture.Equals("FIRE"))
+            if (currentGesture == "CLOSE")
             {
-                Debug.Log("FIRE");
-                //if(curPower==null)curPower=StartCoroutine(ActivatePlasmaBall());
+                Debug.Log("Starting Magic");
+                StartCoroutine(StartMagic());
+                hand_magic_atack.SetActive(true);
+                yield return new WaitForSeconds(5f);
+                hand_magic_atack.SetActive(false);
+                StopCoroutine(StartMagic());
+                Debug.Log("Ending_Magic");
             }
-        	else if(stateMachine.Equals("TWO") && currentGesture.Equals("LOVE")){
-        		Debug.Log("THUNDER");
-        		//if(curPower==null)curPower=StartCoroutine(ActivateThunder());
-        	}
-        	else if(stateMachine.Equals("FOUR") && currentGesture.Equals("COOL")){
-        		Debug.Log("FLAMES");
-                //if(curPower==null)curPower=StartCoroutine(ActivateFlames());
+            if (currentGesture == "THUMB")
+            {
+                Debug.Log("Starting Defense");
+                hand_magic_defense.SetActive(true);
+                StartCoroutine(StartDefense());
+                yield return new WaitForSeconds(5f);
+                hand_magic_defense.SetActive(false);
+                StopCoroutine(StartDefense());
+                Debug.Log("Ending_Defense");
             }
-            // else if(stateMachine.Equals("ITALIAN") && currentGesture.Equals("HANG_LOOSE")){
-            //     if(curPower==null)curPower=StartCoroutine(ActivatePlasmaBar());
-            // }
-			stateMachine = currentGesture;
+            stateMachine = currentGesture;
             yield return new WaitForSeconds(.2F);
         }
     }
+    IEnumerator StartMagic()
+    {
+        while (true)
+        {
+            string secont_gesture = currentGesture;
+            if (secont_gesture == "OPEN")
+            {
+                hand_magic_atack.SetActive(false);
+                fire.SetActive(true);
+                Debug.Log("BOLA DE FOGO, METEOOOORO");
+                //yield return new WaitForSeconds(.5f);
+                break;
+                
+            }
 
+            if (secont_gesture == "LOVE")
+            {
+                hand_magic_atack.SetActive(false);
+                fire2.SetActive(true);
+                Debug.Log("SPIDER MAN");
+                //yield return new WaitForSeconds(.5f);
+                break;
+
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+
+    }
+
+    IEnumerator StartDefense()
+    {
+        while (true)
+        {
+            string secont_gesture = currentGesture;
+            if (secont_gesture == "OPEN")
+            {
+                hand_magic_defense.SetActive(false);
+                Debug.Log("MURALHA DE CRISTAL");
+                fire3.SetActive(true);
+                //yield return new WaitForSeconds(.5f);
+                break;
+
+            }
+
+            if (secont_gesture == "LOVE")
+            {
+
+                hand_magic_defense.SetActive(false);
+                Debug.Log("VENTO IMPETUOSO");
+                //yield return new WaitForSeconds(.5f);
+                break;
+
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+
+    }
 }
