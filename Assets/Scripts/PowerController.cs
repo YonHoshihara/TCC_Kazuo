@@ -13,6 +13,9 @@ public class PowerController : MonoBehaviour
     public GameObject fire3;
     public GameObject hand_magic_atack;
     public GameObject hand_magic_defense;
+    public GameObject fireball;
+    public GameObject right_scope;
+    public GameObject left_scope;
     //public bool is_start_magic = false;
     IEnumerator Start()
     {
@@ -29,6 +32,7 @@ public class PowerController : MonoBehaviour
                 StopCoroutine(StartMagic());
                 Debug.Log("Ending_Magic");
             }
+           /*
             if (currentGesture == "THUMB")
             {
                 Debug.Log("Starting Defense");
@@ -39,6 +43,7 @@ public class PowerController : MonoBehaviour
                 StopCoroutine(StartDefense());
                 Debug.Log("Ending_Defense");
             }
+            */
             stateMachine = currentGesture;
             yield return new WaitForSeconds(.2F);
         }
@@ -51,7 +56,8 @@ public class PowerController : MonoBehaviour
             if (secont_gesture == "OPEN")
             {
                 hand_magic_atack.SetActive(false);
-                fire.SetActive(true);
+                Debug.Log("Shooting");
+                Instantiate_Prefab(fireball, right_scope.transform.position);   
                 Debug.Log("BOLA DE FOGO, METEOOOORO");
                 //yield return new WaitForSeconds(.5f);
                 break;
@@ -72,6 +78,10 @@ public class PowerController : MonoBehaviour
 
     }
 
+    void Instantiate_Prefab(GameObject obj, Vector3 instantate_positon)
+    {
+        Instantiate(obj, instantate_positon, Quaternion.identity);
+    }
     IEnumerator StartDefense()
     {
         while (true)
@@ -99,5 +109,16 @@ public class PowerController : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
 
+    }
+
+  
+    void Update()
+    {
+
+        if (Input.GetKeyDown("space"))
+        {
+            Debug.Log("Shooting");
+            Instantiate_Prefab(fireball, right_scope.transform.position);
+        }
     }
 }

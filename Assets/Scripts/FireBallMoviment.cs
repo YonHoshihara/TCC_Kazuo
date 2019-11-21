@@ -10,34 +10,40 @@ public class FireBallMoviment : MonoBehaviour
 
      void Start()
     {
-        GetComponent<Rigidbody>().AddForce(direction*fireSpeed);
+        GetComponent<Rigidbody>().AddForce(direction * fireSpeed);
     }
      
+    public void Shoot()
+    {
+       
+    }
     void LateUpdate()
     {
-    //
-      //  if (transform.up.y < 0){
+        //
+        //  if (transform.up.y < 0){
         //    transform.position += 1 * transform.up * fireSpeed * Time.deltaTime;
-          //  Debug.Log(transform.up);
+        //  Debug.Log(transform.up);
         //}
         //else
         //{
-          //  transform.position += -1 * transform.up * fireSpeed * Time.deltaTime;
+        //  transform.position += -1 * transform.up * fireSpeed * Time.deltaTime;
         //}
-        
-        
+
+
         time += Time.deltaTime;
         if (time > 4) Destroy(gameObject);
     }
 
 
-    private void OnCollisionEnter(Collision col)
+     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.layer != 8)
+       
+        if (col.gameObject.tag == "enemy")
         {
         	print(col.gameObject.name);
             Destroy(this.gameObject);
         }
+        
 
     }
 }
