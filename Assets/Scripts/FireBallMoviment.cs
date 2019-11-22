@@ -7,7 +7,8 @@ public class FireBallMoviment : MonoBehaviour
     float time;
     public float fireSpeed;
     public Vector3 direction;
-
+    public GameObject explosion;
+    public bool is_explosion;
      void Start()
     {
         GetComponent<Rigidbody>().AddForce(direction * fireSpeed);
@@ -35,14 +36,27 @@ public class FireBallMoviment : MonoBehaviour
     }
 
 
-     void OnTriggerEnter(Collider col)
+     IEnumerator OnTriggerEnter(Collider col)
     {
        
         if (col.gameObject.tag == "enemy")
         {
-        	print(col.gameObject.name);
-            Destroy(this.gameObject);
+            
+            print(col.gameObject.name);
+            if (is_explosion)
+            {
+                explosion.SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0f);
+                Destroy(this.gameObject);
+            }
+            
         }
+
         
 
     }

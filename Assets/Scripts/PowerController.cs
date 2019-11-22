@@ -9,7 +9,8 @@ public class PowerController : MonoBehaviour
     string lastGesture;
     string stateMachine = "";
     public GameObject fire;
-    public GameObject fire2;
+    private Animation atk_scope_anim;
+    public GameObject defense_fire;
     public GameObject fire3;
     public GameObject hand_magic_atack;
     public GameObject hand_magic_defense;
@@ -19,7 +20,8 @@ public class PowerController : MonoBehaviour
     //public bool is_start_magic = false;
     IEnumerator Start()
     {
-        
+        atk_scope_anim = GetComponent<Animation>();
+  
         while (true)
         {
             if (currentGesture == "CLOSE")
@@ -56,9 +58,9 @@ public class PowerController : MonoBehaviour
             if (secont_gesture == "OPEN")
             {
                 hand_magic_atack.SetActive(false);
-                Debug.Log("Shooting");
+                //Debug.Log("Shooting");
                 Instantiate_Prefab(fireball, right_scope.transform.position);   
-                Debug.Log("BOLA DE FOGO, METEOOOORO");
+               // Debug.Log("BOLA DE FOGO, METEOOOORO");
                 //yield return new WaitForSeconds(.5f);
                 break;
                 
@@ -67,9 +69,10 @@ public class PowerController : MonoBehaviour
             if (secont_gesture == "LOVE")
             {
                 hand_magic_atack.SetActive(false);
-                fire2.SetActive(true);
-                Debug.Log("SPIDER MAN");
-                //yield return new WaitForSeconds(.5f);
+                defense_fire.SetActive(true);
+                //Debug.Log("SPIDER MAN");
+                yield return new WaitForSeconds(10f);
+                defense_fire.SetActive(false);
                 break;
 
             }
