@@ -66,18 +66,21 @@ public class PowerController : MonoBehaviour
                 
             }
 
-            if (secont_gesture == "LOVE")
-            {
-                hand_magic_atack.SetActive(false);
-                defense_fire.SetActive(true);
-                //Debug.Log("SPIDER MAN");
-                yield return new WaitForSeconds(10f);
-                defense_fire.SetActive(false);
-                break;
+           
+              if (secont_gesture == "LOVE")
+              {
+                  hand_magic_atack.SetActive(false);
+                  defense_fire.SetActive(true);
+                  //Debug.Log("SPIDER MAN");
+                  yield return new WaitForSeconds(10f);
+                  defense_fire.SetActive(false);
+                  break;
 
-            }
+              }
+             
             yield return new WaitForSeconds(.1f);
         }
+        
 
     }
 

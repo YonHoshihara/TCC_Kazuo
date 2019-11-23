@@ -12,6 +12,7 @@ public class GolenMoviment : MonoBehaviour
     private Golen_atack golen_atack;
     void Start()
     {
+        player_positon = GameObject.FindWithTag("Player").GetComponent<Transform>();
         golen_atack = GetComponent<Golen_atack>();
     }
 

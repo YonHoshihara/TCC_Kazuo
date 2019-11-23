@@ -21,7 +21,7 @@ public PowerController powerController;
     string dataReceived = " ";
 
     public void LateUpdate(){
-    	textMesh.text = dataReceived;
+    	//textMesh.text = dataReceived;
 
 	    powerController.currentGesture = dataReceived;
     }

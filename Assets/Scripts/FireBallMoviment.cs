@@ -9,9 +9,12 @@ public class FireBallMoviment : MonoBehaviour
     public Vector3 direction;
     public GameObject explosion;
     public bool is_explosion;
+   // public Transform direcional_start;
+   // public Transform directional_end;
      void Start()
     {
-        GetComponent<Rigidbody>().AddForce(direction * fireSpeed);
+       // direction = directional_end.position - direcional_start.position;
+        GetComponent<Rigidbody>().AddForce(direction.normalized * fireSpeed);
     }
      
     public void Shoot()
