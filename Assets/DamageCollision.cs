@@ -10,13 +10,16 @@ public class DamageCollision : MonoBehaviour
     public int life;
     private Golen_atack golen_atack;
     bool is_alive;
-    
+    private GolenSoundController sound;
     IEnumerator Start()
     {
+        sound = GetComponent<GolenSoundController>();
         anim = gameObject.GetComponent<Animator>();
         golen_atack = GetComponent<Golen_atack>();
-        yield return new WaitForSeconds(5f);
+        sound.playRoarSound(false);
+        yield return new WaitForSeconds(2f);
         anim.SetTrigger("Walk");
+        sound.playWalkSound(true);
         is_alive = true;
         GetComponent<GolenMoviment>().enabled = true;
     }
@@ -34,10 +37,13 @@ public class DamageCollision : MonoBehaviour
             life--;
             if(life == 0)
             {
-                anim.SetTrigger("Iddle");
+                //anim.SetTrigger("Iddle");
                 GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+                
                 GetComponent<GolenMoviment>().enabled = false;
-                yield return new WaitForSeconds(3f);
+                sound.playDamageSound(false);
+                yield return new WaitForSeconds(1f);
+                sound.playDieSound(false);
                 anim.SetTrigger("Die");
                 yield return new WaitForSeconds(10f);
                 Destroy(gameObject);
@@ -47,17 +53,20 @@ public class DamageCollision : MonoBehaviour
            if (is_atack)
             {
                 anim.SetTrigger("Damage");
+                sound.playDamageSound(false);
                 yield return new WaitForSeconds(2f);
                 anim.SetTrigger("Atack");
+                sound.playAtackSound(false);
             }
             else{
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 GetComponent<GolenMoviment>().enabled = false;
+                sound.playDamageSound(false);
                 anim.SetTrigger("Damage");
-                yield return new WaitForSeconds(1.5f);
-               
+                yield return new WaitForSeconds(1f);
                 anim.SetTrigger("Walk");
                 GetComponent<GolenMoviment>().enabled = true;
+                sound.playWalkSound(true);
             }
            
             
@@ -67,7 +76,7 @@ public class DamageCollision : MonoBehaviour
     //Just for gollen
     IEnumerator OnTriggerStay(Collider col)
     {
-        Debug.Log("firestorm");
+       // Debug.Log("firestorm");
         if (col.gameObject.tag == "firestorm")
         {
 

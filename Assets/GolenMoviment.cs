@@ -10,10 +10,12 @@ public class GolenMoviment : MonoBehaviour
     public float moveSpeed;
     public float min_distance;
     private Golen_atack golen_atack;
+    private GolenSoundController sound;
     void Start()
     {
         player_positon = GameObject.FindWithTag("Player").GetComponent<Transform>();
         golen_atack = GetComponent<Golen_atack>();
+        sound = GetComponent<GolenSoundController>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,9 @@ public class GolenMoviment : MonoBehaviour
         else
         {
             golen_atack.is_atack = true;
+          //  sound.playAtackSound();
             GetComponent<GolenMoviment>().enabled = false;
+
         }
         
     }
