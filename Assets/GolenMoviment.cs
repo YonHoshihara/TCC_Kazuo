@@ -33,6 +33,7 @@ public class GolenMoviment : MonoBehaviour
         else
         {
             golen_atack.is_atack = true;
+            sound.stopWalkSound(false);
           //  sound.playAtackSound();
             GetComponent<GolenMoviment>().enabled = false;
 

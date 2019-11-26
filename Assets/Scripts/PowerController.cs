@@ -21,6 +21,7 @@ public class PowerController : MonoBehaviour
     //public bool is_start_magic = false;
     IEnumerator Start()
     {
+       
         atk_scope_anim = GetComponent<Animation>();
         sound = GetComponent<GolenSoundController>();
 
@@ -35,6 +36,7 @@ public class PowerController : MonoBehaviour
                 yield return new WaitForSeconds(5f);
                 hand_magic_atack.SetActive(false);
                 StopCoroutine(StartMagic());
+                sound.stopRoarSound(false);
                 Debug.Log("Ending_Magic");
             }
            /*
@@ -75,13 +77,16 @@ public class PowerController : MonoBehaviour
               
             if (secont_gesture == "LOVE")
               {
-                  hand_magic_atack.SetActive(false);
-                  defense_fire.SetActive(true);
+                    hand_magic_atack.SetActive(false);
+                    defense_fire.SetActive(true);
                     sound.stopRoarSound(false);
-                sound.playAtackSound(false);
+                    sound.playAtackSound(false);
                   //Debug.Log("SPIDER MAN");
-                  yield return new WaitForSeconds(10f);
-                  defense_fire.SetActive(false);
+                  //defense_fire.SetActive(false);
+                yield return new WaitForSeconds(3f);
+                defense_fire.SetActive(false);
+               // yield return new WaitForSeconds(10f);
+                 
                   break;
 
               }

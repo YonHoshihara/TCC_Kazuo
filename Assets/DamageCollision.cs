@@ -13,6 +13,7 @@ public class DamageCollision : MonoBehaviour
     private GolenSoundController sound;
     IEnumerator Start()
     {
+
         sound = GetComponent<GolenSoundController>();
         anim = gameObject.GetComponent<Animator>();
         golen_atack = GetComponent<Golen_atack>();
@@ -39,11 +40,11 @@ public class DamageCollision : MonoBehaviour
             {
                 //anim.SetTrigger("Iddle");
                 GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-                
                 GetComponent<GolenMoviment>().enabled = false;
-                sound.playDamageSound(false);
-                yield return new WaitForSeconds(1f);
+               // sound.playDamageSound(false);
+              //  yield return new WaitForSeconds(.2f);
                 sound.playDieSound(false);
+        
                 anim.SetTrigger("Die");
                 yield return new WaitForSeconds(10f);
                 Destroy(gameObject);
@@ -52,28 +53,75 @@ public class DamageCollision : MonoBehaviour
            bool is_atack = golen_atack.is_atack;
            if (is_atack)
             {
-                anim.SetTrigger("Damage");
                 sound.playDamageSound(false);
-                yield return new WaitForSeconds(2f);
+                anim.SetTrigger("Damage");
+                yield return new WaitForSeconds(1f);
                 anim.SetTrigger("Atack");
                 sound.playAtackSound(false);
             }
             else{
+                
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                GetComponent<GolenMoviment>().enabled = false;
                 sound.playDamageSound(false);
                 anim.SetTrigger("Damage");
+                GetComponent<GolenMoviment>().enabled = false;
                 yield return new WaitForSeconds(1f);
                 anim.SetTrigger("Walk");
                 GetComponent<GolenMoviment>().enabled = true;
                 sound.playWalkSound(true);
             }
-           
-            
+
+
+        }
+        else
+        {
+            if (col.gameObject.tag == "firestorm")
+            {
+
+                if (is_alive)
+                {
+                    life--;
+
+                   // Debug.Log(life);
+                    if (life == 0)
+                    {
+                        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                        GetComponent<GolenMoviment>().enabled = false;              
+                        golen_atack.is_atack = false;
+                        yield return new WaitForSeconds(.5f);
+                        GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 250));
+                        yield return new WaitForSeconds(.5f);
+                        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                        sound.playDieSound(false);
+                        anim.SetTrigger("Die");
+                        yield return new WaitForSeconds(10f);
+                        Destroy(gameObject);
+                    }
+
+                   
+                    else
+                    {
+                        anim.SetTrigger("Damage");
+                        GetComponent<GolenMoviment>().enabled = false;
+                        golen_atack.is_atack = false;
+                        sound.playDamageSound(false);
+                        yield return new WaitForSeconds(1f);
+                        GetComponent<Rigidbody>().AddForce(new Vector3(0, 0 , 250));
+                        yield return new WaitForSeconds(2f);
+                        GetComponent<Rigidbody>().velocity = (new Vector3(0,0,0));
+                        anim.SetTrigger("Walk");
+                        GetComponent<GolenMoviment>().enabled = true ;
+                    }
+                }
+
+
+
+            }
         }
     }
 
     //Just for gollen
+    /*
     IEnumerator OnTriggerStay(Collider col)
     {
        // Debug.Log("firestorm");
@@ -119,4 +167,6 @@ public class DamageCollision : MonoBehaviour
 
         }
     }
+
+*/
 }
