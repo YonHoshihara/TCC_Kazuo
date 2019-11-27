@@ -81,13 +81,9 @@ public class PowerController : MonoBehaviour
                     defense_fire.SetActive(true);
                     sound.stopRoarSound(false);
                     sound.playAtackSound(false);
-                  //Debug.Log("SPIDER MAN");
-                  //defense_fire.SetActive(false);
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
                 defense_fire.SetActive(false);
-               // yield return new WaitForSeconds(10f);
-                 
-                  break;
+                break;
 
               }
               

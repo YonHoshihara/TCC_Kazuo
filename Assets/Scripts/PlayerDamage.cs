@@ -10,9 +10,10 @@ public class PlayerDamage : MonoBehaviour
     public int playerLife;
     public GameObject damage_feedback;
     public GameObject gameOver;
+    public GolenSoundController sound;
     void Start()
     {
-        
+        sound = GetComponent<GolenSoundController>();
     }
 
     // Update is called once per frame
@@ -27,10 +28,10 @@ public class PlayerDamage : MonoBehaviour
         {
           //  yield return new WaitForSeconds(5f);
             playerLife--;
+            sound.playDamageSound(false);
             damage_feedback.SetActive(true);
-            //damage_feedback.GetComponent<Image>().material.color = Color.red;
-            yield return new WaitForSeconds(2f);
-           damage_feedback.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            damage_feedback.SetActive(false);
             Debug.Log("Getting Damage");
             Debug.Log(playerLife);
             if (playerLife < 0)

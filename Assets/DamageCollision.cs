@@ -88,12 +88,13 @@ public class DamageCollision : MonoBehaviour
                         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                         GetComponent<GolenMoviment>().enabled = false;              
                         golen_atack.is_atack = false;
-                        yield return new WaitForSeconds(.5f);
+                        //yield return new WaitForSeconds(.5f);
                         GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 250));
                         yield return new WaitForSeconds(.5f);
                         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                         sound.playDieSound(false);
                         anim.SetTrigger("Die");
+                        GetComponent<SphereCollider>().enabled = false;
                         yield return new WaitForSeconds(10f);
                         Destroy(gameObject);
                     }
@@ -101,16 +102,20 @@ public class DamageCollision : MonoBehaviour
                    
                     else
                     {
-                        anim.SetTrigger("Damage");
-                        GetComponent<GolenMoviment>().enabled = false;
-                        golen_atack.is_atack = false;
-                        sound.playDamageSound(false);
-                        yield return new WaitForSeconds(1f);
-                        GetComponent<Rigidbody>().AddForce(new Vector3(0, 0 , 250));
-                        yield return new WaitForSeconds(2f);
-                        GetComponent<Rigidbody>().velocity = (new Vector3(0,0,0));
-                        anim.SetTrigger("Walk");
-                        GetComponent<GolenMoviment>().enabled = true ;
+                        if (life > 0)
+                        {
+                           
+                            GetComponent<GolenMoviment>().enabled = false;
+                            golen_atack.is_atack = false;
+                            sound.playDamageSound(false);
+                            anim.SetTrigger("Damage");
+                            GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 250));
+                            yield return new WaitForSeconds(1f);
+                            anim.SetTrigger("Walk");
+                            GetComponent<Rigidbody>().velocity = (new Vector3(0, 0, 0));
+                            GetComponent<GolenMoviment>().enabled = true;
+                        }
+                        
                     }
                 }
 
