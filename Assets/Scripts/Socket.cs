@@ -6,6 +6,10 @@ using System.Text;
 using UnityEngine;
 using System.Threading;
 using UnityEngine.UI;
+using System;
+using System.Diagnostics;
+
+using System.ComponentModel;
 public class Socket : MonoBehaviour {
     Thread mThread;
     public string connectionIP = "127.0.0.1";
@@ -31,6 +35,7 @@ public PowerController powerController;
         ThreadStart ts = new ThreadStart(GetInfo);
         mThread = new Thread(ts);
         mThread.Start();
+        Start_Python("C:/Users/YonHoshiara/Documents/TCC/repositorios/TCC_Kazuo/Assets/Scripts/start_pyton.bat");
     }
 
     public static string GetLocalIPAddress()
@@ -51,7 +56,7 @@ public PowerController powerController;
         localAdd = IPAddress.Parse(connectionIP);
         listener = new TcpListener(IPAddress.Any, connectionPort);
         listener.Start();
-
+       
         client = listener.AcceptTcpClient();
         
         running = true;
@@ -84,6 +89,10 @@ public PowerController powerController;
 	   
     }
    
+    void Start_Python(string path)
+    {
+        Process.Start(path);
+    }
 
    
 }

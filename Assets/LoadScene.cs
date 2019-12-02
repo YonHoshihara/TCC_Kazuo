@@ -9,22 +9,25 @@ public class LoadScene : MonoBehaviour
     // Start is called before the first frame update
     public string SceneName;
     public GameObject fire;
+    public GameObject fade;
     void Start()
     {
         
     }
-
-    private IEnumerator OnTriggerEnter(Collider other)
+    public void Load()
     {
-        if (other.gameObject.tag == "fireball")
-        {
-            //  yield return new WaitForSeconds(5f);
-                fire.SetActive(true);
-                yield return new WaitForSeconds(5f);
-                SceneManager.LoadScene(SceneName);         
-
-        }
-        yield return new WaitForSeconds(.2f);
+        StartCoroutine(StartGame());
+    }
+    private IEnumerator StartGame()
+    {
+        fire.SetActive(true);
+      
+        yield return new WaitForSeconds(5f);
+        fade.SetActive(true);
+        fire.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneName);
+        
     }
 
     // Update is called once per frame

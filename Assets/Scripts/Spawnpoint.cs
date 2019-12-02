@@ -9,8 +9,10 @@ public class Spawnpoint : MonoBehaviour
     //public SpawnObjects spawnContoller;
     public float startTime;
     public float repeatTime;
+    public PlayerDamage player;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("player_damage").GetComponent<PlayerDamage>();
         InvokeRepeating("SpawnMonster",startTime,repeatTime);
     }
 
@@ -22,6 +24,9 @@ public class Spawnpoint : MonoBehaviour
 
     public void SpawnMonster()
     {
-        Instantiate(objectToSpawn, transform.position, transform.rotation);
+       
+            Instantiate(objectToSpawn, transform.position, transform.rotation);
+        
+        
     }
 }

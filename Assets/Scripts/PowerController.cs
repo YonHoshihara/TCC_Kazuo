@@ -18,79 +18,89 @@ public class PowerController : MonoBehaviour
     public GameObject right_scope;
     public GameObject left_scope;
     private GolenSoundController sound;
+    private PlayerDamage player;
     //public bool is_start_magic = false;
     IEnumerator Start()
     {
        
         atk_scope_anim = GetComponent<Animation>();
         sound = GetComponent<GolenSoundController>();
+        player = GameObject.FindGameObjectWithTag("player_damage").GetComponent<PlayerDamage>();
 
         while (true)
         {
-            if (currentGesture == "CLOSE")
-            {
-                Debug.Log("Starting Magic");
-                sound.playRoarSound(false);
-                StartCoroutine(StartMagic());
-                hand_magic_atack.SetActive(true);
-                yield return new WaitForSeconds(5f);
-                hand_magic_atack.SetActive(false);
-                StopCoroutine(StartMagic());
-                sound.stopRoarSound(false);
-                Debug.Log("Ending_Magic");
-            }
-           /*
-            if (currentGesture == "THUMB")
-            {
-                Debug.Log("Starting Defense");
-                hand_magic_defense.SetActive(true);
-                StartCoroutine(StartDefense());
-                yield return new WaitForSeconds(5f);
-                hand_magic_defense.SetActive(false);
-                StopCoroutine(StartDefense());
-                Debug.Log("Ending_Defense");
-            }
-            */
-            stateMachine = currentGesture;
-            yield return new WaitForSeconds(.2F);
-        }
-    }
-    IEnumerator StartMagic()
-    {
-        while (true)
-        {
-            string secont_gesture = currentGesture;
-            if (secont_gesture == "OPEN")
-            {
-                hand_magic_atack.SetActive(false);
-                sound.stopRoarSound(false);
-                sound.playAtackSound(false);
-                //Debug.Log("Shooting");
-                Instantiate_Prefab(fireball, right_scope.transform.position);   
-               // Debug.Log("BOLA DE FOGO, METEOOOORO");
-                //yield return new WaitForSeconds(.5f);
-                break;
-                
-            }
-
            
-              
-            if (secont_gesture == "LOVE")
-              {
+                if (currentGesture == "CLOSE")
+                {
+                    Debug.Log("Starting Magic");
+                    sound.playRoarSound(false);
+                    StartCoroutine(StartMagic());
+                    hand_magic_atack.SetActive(true);
+                    yield return new WaitForSeconds(5f);
+                    hand_magic_atack.SetActive(false);
+                    StopCoroutine(StartMagic());
+                    sound.stopRoarSound(false);
+                    Debug.Log("Ending_Magic");
+                }
+                /*
+                 if (currentGesture == "THUMB")
+                 {
+                     Debug.Log("Starting Defense");
+                     hand_magic_defense.SetActive(true);
+                     StartCoroutine(StartDefense());
+                     yield return new WaitForSeconds(5f);
+                     hand_magic_defense.SetActive(false);
+                     StopCoroutine(StartDefense());
+                     Debug.Log("Ending_Defense");
+                 }
+                 */
+                stateMachine = currentGesture;
+                yield return new WaitForSeconds(.2F);
+            
+          
+        }
+        IEnumerator StartMagic()
+        {
+            while (true)
+            {
+
+
+                string secont_gesture = currentGesture;
+                if (secont_gesture == "OPEN")
+                {
+                    hand_magic_atack.SetActive(false);
+                    sound.stopRoarSound(false);
+                    sound.playAtackSound(false);
+                    //Debug.Log("Shooting");
+                    Instantiate_Prefab(fireball, right_scope.transform.position);
+                    // Debug.Log("BOLA DE FOGO, METEOOOORO");
+                    //yield return new WaitForSeconds(.5f);
+                    break;
+
+                }
+
+
+
+                if (secont_gesture == "LOVE")
+                {
                     hand_magic_atack.SetActive(false);
                     defense_fire.SetActive(true);
                     sound.stopRoarSound(false);
                     sound.playAtackSound(false);
-                yield return new WaitForSeconds(2f);
-                defense_fire.SetActive(false);
-                break;
+                    yield return new WaitForSeconds(2f);
+                    defense_fire.SetActive(false);
+                    break;
 
-              }
-              
-             
-            yield return new WaitForSeconds(.1f);
+                }
+
+
+                yield return new WaitForSeconds(.1f);
+            }
+
         }
-        
+
+
+
 
     }
 
@@ -127,7 +137,14 @@ public class PowerController : MonoBehaviour
 
     }
 
-  
+    IEnumerator Die()
+    {
+        //hand_magic_atack.SetActive(false);
+        hand_magic_atack.SetActive(false);
+        defense_fire.SetActive(false);
+
+        yield return new WaitForSeconds(0);
+    }
     void Update()
     {
 

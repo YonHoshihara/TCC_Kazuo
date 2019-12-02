@@ -11,9 +11,13 @@ public class PlayerDamage : MonoBehaviour
     public GameObject damage_feedback;
     public GameObject gameOver;
     public GolenSoundController sound;
+    public bool is_dead;
+    public Rigidbody leap_rig;
     void Start()
     {
+        is_dead = false;
         sound = GetComponent<GolenSoundController>();
+        leap_rig = GameObject.FindGameObjectWithTag("leap_rig").GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -26,7 +30,9 @@ public class PlayerDamage : MonoBehaviour
     {
         if (other.gameObject.tag == monster_tag)
         {
-          //  yield return new WaitForSeconds(5f);
+            //  yield return new WaitForSeconds(5f);
+
+            
             playerLife--;
             sound.playDamageSound(false);
             damage_feedback.SetActive(true);
@@ -36,9 +42,15 @@ public class PlayerDamage : MonoBehaviour
             Debug.Log(playerLife);
             if (playerLife < 0)
             {
+                is_dead = true;
                 gameOver.SetActive(true);
+                damage_feedback.SetActive(true);
+                leap_rig.useGravity = true;
                 yield return new WaitForSeconds(5f);
                 gameOver.SetActive(false);
+                damage_feedback.SetActive(false);
+                is_dead = false;
+                leap_rig.useGravity = false;
                 SceneManager.LoadScene("Menu");
             }
 

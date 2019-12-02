@@ -38,13 +38,10 @@ public class DamageCollision : MonoBehaviour
             life--;
             if(life == 0)
             {
-                //anim.SetTrigger("Iddle");
+
                 GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
                 GetComponent<GolenMoviment>().enabled = false;
-               // sound.playDamageSound(false);
-              //  yield return new WaitForSeconds(.2f);
                 sound.playDieSound(false);
-        
                 anim.SetTrigger("Die");
                 yield return new WaitForSeconds(10f);
                 Destroy(gameObject);
