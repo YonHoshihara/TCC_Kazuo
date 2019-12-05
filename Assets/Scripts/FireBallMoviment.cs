@@ -45,7 +45,7 @@ public class FireBallMoviment : MonoBehaviour
         if (col.gameObject.tag == "enemy")
         {
             
-            print(col.gameObject.name);
+           // print(col.gameObject.name);
             if (is_explosion)
             {
                 explosion.SetActive(true);

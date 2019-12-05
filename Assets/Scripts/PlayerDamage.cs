@@ -38,8 +38,8 @@ public class PlayerDamage : MonoBehaviour
             damage_feedback.SetActive(true);
             yield return new WaitForSeconds(1f);
             damage_feedback.SetActive(false);
-            Debug.Log("Getting Damage");
-            Debug.Log(playerLife);
+           // Debug.Log("Getting Damage");
+           // Debug.Log(playerLife);
             if (playerLife < 0)
             {
                 is_dead = true;

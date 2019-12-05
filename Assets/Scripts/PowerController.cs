@@ -32,7 +32,7 @@ public class PowerController : MonoBehaviour
            
                 if (currentGesture == "CLOSE")
                 {
-                    Debug.Log("Starting Magic");
+                  //  Debug.Log("Starting Magic");
                     sound.playRoarSound(false);
                     StartCoroutine(StartMagic());
                     hand_magic_atack.SetActive(true);
@@ -40,7 +40,7 @@ public class PowerController : MonoBehaviour
                     hand_magic_atack.SetActive(false);
                     StopCoroutine(StartMagic());
                     sound.stopRoarSound(false);
-                    Debug.Log("Ending_Magic");
+                   // Debug.Log("Ending_Magic");
                 }
                 /*
                  if (currentGesture == "THUMB")
